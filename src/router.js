@@ -32,7 +32,7 @@ function getRoute(path) {
 
 function getRouteParams(path) {
   const route = getRoute(path);
-  return route ? route.params : {};
+  return route ? route.params : [];
 }
 
 function exec(path) {
