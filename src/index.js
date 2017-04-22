@@ -45,6 +45,7 @@ const routes = [
   () => render(nest(Layout, NotFound)),
 ];
 
+// Log route changes
 subscribe(params => console.debug("route: ", params));
 
 router(routes);

@@ -30,7 +30,7 @@ function getRoute(path) {
   return undefined;
 }
 
-function getRouteParams(path) {
+export function getRouteParams(path) {
   const route = getRoute(path);
   return route ? route.params : [];
 }

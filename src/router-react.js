@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { history, subscribe } from "./router";
+import { history, subscribe, getRouteParams } from "./router";
 
 function handleLink(href) {
   return function(event) {
@@ -21,10 +21,7 @@ export function withRouter(mapRouterProps = router => router) {
     return class extends Component {
       constructor() {
         super();
-        this.state = {
-          params: [],
-        };
-        this.subscription = subscribe(params => this.setState({ params }));
+        this.subscription = subscribe(() => this.setState({}));
       }
 
       componentWillUnmount() {
@@ -37,7 +34,7 @@ export function withRouter(mapRouterProps = router => router) {
           router: mapRouterProps({
             Link,
             location: window.location,
-            params: this.state.params,
+            params: getRouteParams(window.location.pathname),
           }),
         });
       }
