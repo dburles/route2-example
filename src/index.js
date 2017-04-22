@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import qs from "qs";
 import { nest } from "recompose";
 import router, { history } from "./router";
 import Layout from "./containers/Layout";
@@ -26,6 +25,9 @@ const routes = [
 
   /^\/page-one\/(\w+)\/(\w+)$/,
   () => render(nest(Layout, PageOne)),
+
+  /^\/page-two$/,
+  () => render(nest(Layout, PageTwo)),
 
   // /^\/page-one\/(\w+)\/(\w+)$/,
   // ([, one, two]) => console.log("one with params:", { one, two }),
