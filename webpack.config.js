@@ -18,7 +18,8 @@ module.exports = {
   devtool: "source-map",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    open: true,
+    open: false,
     port: 3000,
+    historyApiFallback: true,
   },
 };
