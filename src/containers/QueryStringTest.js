@@ -1,5 +1,5 @@
-import { withRouter } from "../router-react";
 import qs from "qs";
+import { withRouter } from "../router-react";
 import QueryStringTest from "../components/QueryStringTest";
 
 function mapRouterProps(router) {

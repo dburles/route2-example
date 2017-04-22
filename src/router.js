@@ -21,6 +21,7 @@ function getRoute() {
       foundIndex = i;
       return r.test(location.pathname);
     }
+    return false;
   });
 
   if (route) {
@@ -31,6 +32,8 @@ function getRoute() {
       fn: routes[foundIndex + 1],
     };
   }
+
+  return undefined;
 }
 
 export function getRouteParams() {
@@ -40,9 +43,11 @@ export function getRouteParams() {
 
 function exec() {
   const route = getRoute();
-  route
-    ? route.fn(route.params)
-    : console.error(`router: no match for ${location.pathname}`);
+  if (route) {
+    route.fn(route.params);
+  } else {
+    console.error(`router: no match for ${location.pathname}`);
+  }
 }
 
 export const history = {

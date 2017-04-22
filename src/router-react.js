@@ -31,7 +31,11 @@ export function withRouter(mapRouterProps = router => router) {
       render() {
         return React.createElement(WrappedComponent, {
           ...this.props,
-          router: mapRouterProps({ Link, location, params: getRouteParams() }),
+          router: mapRouterProps({
+            Link,
+            location: window.location,
+            params: getRouteParams(),
+          }),
         });
       }
     };
