@@ -57,7 +57,7 @@ function Layout({ router: { Link, params, location }, children }) {
         </li>
         <li>
           <Link href="/redirect-to-page-one/redirected">
-            Redirect (with arguments)
+            Redirect to Page One (with params)
           </Link>
         </li>
         <li><Link href="/askfjaslkj">404</Link></li>
