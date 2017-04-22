@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { nest } from "recompose";
-import router, { history } from "./router";
+import router, { history, subscribe } from "./router";
 import Layout from "./containers/Layout";
 import Home from "./components/Home";
 import PageOne from "./containers/PageOne";
@@ -32,14 +32,19 @@ const routes = [
   // /^\/page-one\/(\w+)\/(\w+)$/,
   // ([, one, two]) => console.log("one with params:", { one, two }),
 
-  /^\/query-string-test$/,
+  /^\/query-string-test.*$/,
   () => render(nest(Layout, QueryStringTest)),
 
   /^\/redirect-to-page-one\/(\w+)$/,
   ([, test]) => history.push(`/page-one/${test}`),
 
+  // /^\/redirect-to-page-one\/(\w+)$/,
+  // ([, test]) => console.log(test),
+
   /.*/,
   () => render(nest(Layout, NotFound)),
 ];
+
+subscribe(params => console.debug("route: ", params));
 
 router(routes);

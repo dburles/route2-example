@@ -8,24 +8,18 @@ export function subscribe(fn) {
   };
 }
 
-function notify() {
-  subscriptions.forEach(fn => fn());
-}
-
-window.onpopstate = () => notify();
-
-function getRoute() {
+function getRoute(path) {
   let foundIndex = 0;
   const route = routes.find((r, i) => {
     if (r instanceof RegExp) {
       foundIndex = i;
-      return r.test(location.pathname);
+      return r.test(path);
     }
     return false;
   });
 
   if (route) {
-    const matches = route.exec(location.pathname);
+    const matches = route.exec(path);
 
     return {
       params: matches,
@@ -36,30 +30,35 @@ function getRoute() {
   return undefined;
 }
 
-export function getRouteParams() {
-  const route = getRoute();
+function getRouteParams(path) {
+  const route = getRoute(path);
   return route ? route.params : {};
 }
 
-function exec() {
-  const route = getRoute();
+function exec(path) {
+  const route = getRoute(path);
   if (route) {
     route.fn(route.params);
   } else {
-    console.error(`router: no match for ${location.pathname}`);
+    console.error(`router: no match for ${path}`);
   }
 }
+
+function notify(path) {
+  subscriptions.forEach(fn => fn(getRouteParams(path)));
+  exec(path);
+}
+
+window.onpopstate = () => notify(window.location.pathname);
 
 export const history = {
   push(path) {
     window.history.pushState({}, null, path);
-    notify();
+    notify(path);
   },
 };
 
 export default function router(map) {
   routes = map;
-  notify();
+  notify(window.location.pathname);
 }
-
-subscribe(exec);
