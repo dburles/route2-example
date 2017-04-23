@@ -2,16 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { nest } from "recompose";
 import router, { history, subscribe } from "./router";
+import Router, { render } from "./router-react";
 import Layout from "./containers/Layout";
 import Home from "./components/Home";
 import PageOne from "./containers/PageOne";
 import PageTwo from "./components/PageTwo";
 import NotFound from "./components/NotFound";
 import QueryStringTest from "./containers/QueryStringTest";
-
-function render(Component) {
-  ReactDOM.render(<Component />, document.getElementById("root"));
-}
 
 const routes = [
   /^\/$/,
@@ -49,3 +46,5 @@ const routes = [
 subscribe(params => console.debug("route: ", params));
 
 router(routes);
+
+ReactDOM.render(<Router />, document.getElementById("root"));

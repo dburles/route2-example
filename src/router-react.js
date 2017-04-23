@@ -41,3 +41,22 @@ export function withRouter(mapRouterProps = router => router) {
     };
   };
 }
+
+let trigger = () => {};
+let component = null;
+
+export function render(c) {
+  component = c;
+  trigger();
+}
+
+export default class Router extends Component {
+  constructor() {
+    super();
+    trigger = () => this.setState({});
+  }
+
+  render() {
+    return React.createElement(component, { ...this.props });
+  }
+}
