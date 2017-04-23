@@ -3,6 +3,15 @@ import { history, subscribe, getRouteParams } from "./router";
 
 function handleLink(href) {
   return function(event) {
+    if (
+      !event.button === 0 ||
+      event.metaKey ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.shiftKey
+    ) {
+      return;
+    }
     event.preventDefault();
     history.push(href);
   };
