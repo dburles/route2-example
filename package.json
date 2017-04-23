@@ -24,6 +24,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "memoizerific": "^1.11.2",
     "qs": "^6.4.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

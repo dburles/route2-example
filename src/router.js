@@ -1,3 +1,5 @@
+import memoizerific from "memoizerific";
+
 let routes = [];
 const subscriptions = [];
 
@@ -8,7 +10,7 @@ export function subscribe(fn) {
   };
 }
 
-function getRoute(path) {
+const getRoute = memoizerific(1)(path => {
   let foundIndex = 0;
   const route = routes.find((r, i) => {
     if (r instanceof RegExp) {
@@ -28,7 +30,7 @@ function getRoute(path) {
   }
 
   return undefined;
-}
+});
 
 export function getRouteParams(path) {
   const route = getRoute(path);
