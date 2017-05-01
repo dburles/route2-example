@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { nest } from "recompose";
-import router, { history, subscribe } from "./router";
+import router, { history } from "./router";
 import Router, { render } from "./router-react";
 import Layout from "./containers/Layout";
 import Home from "./components/Home";
@@ -42,9 +42,6 @@ const routes = [
   /.*/,
   () => render(nest(Layout, NotFound)),
 ];
-
-// Log route changes
-subscribe(params => console.debug("route: ", params));
 
 router(arrayRegex(routes));
 

@@ -19,7 +19,7 @@ export function subscribe(fn) {
 
 function notify(path) {
   resolve(path);
-  subscriptions.forEach(fn => fn(params));
+  subscriptions.forEach(fn => fn());
 }
 
 window.onpopstate = () => notify(window.location.pathname);
