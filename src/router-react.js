@@ -51,19 +51,19 @@ export function withRouter(mapRouterProps = router => router) {
   };
 }
 
-let trigger = () => {};
+let update = () => {};
 let component = null;
 
 export function render(C, params = {}) {
   component = C;
   setRouteParams(params);
-  trigger();
+  update();
 }
 
 export default class Router extends Component {
   constructor() {
     super();
-    trigger = () => this.setState({});
+    update = () => this.setState({});
   }
 
   render() {
