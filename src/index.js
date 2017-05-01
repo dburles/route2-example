@@ -4,5 +4,3 @@ import router, { subscribe } from "./router";
 subscribe(({ path, params }) => console.debug("route: ", { path, params }));
 
 router(path => console.log(path));
-
-// ReactDOM.render(<Router />, document.getElementById("root"));
