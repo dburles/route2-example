@@ -28,7 +28,8 @@
     "qs": "^6.4.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "recompose": "^0.23.1"
+    "recompose": "^0.23.1",
+    "route-parser": "^0.0.5"
   },
   "babel": {
     "presets": [
