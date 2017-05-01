@@ -9,6 +9,7 @@ import PageOne from "./containers/PageOne";
 import PageTwo from "./components/PageTwo";
 import NotFound from "./components/NotFound";
 import QueryStringTest from "./containers/QueryStringTest";
+import arrayRegex from "./router-array-regex";
 
 const routes = [
   /^\/$/,
@@ -18,10 +19,10 @@ const routes = [
   () => render(nest(Layout, PageOne)),
 
   /^\/page-one\/(\w+)$/,
-  () => render(nest(Layout, PageOne)),
+  ([, one]) => render(nest(Layout, PageOne), { one }),
 
   /^\/page-one\/(\w+)\/(\w+)$/,
-  () => render(nest(Layout, PageOne)),
+  ([, one, two]) => render(nest(Layout, PageOne), { one, two }),
 
   /^\/page-two$/,
   () => render(nest(Layout, PageTwo)),
@@ -45,6 +46,6 @@ const routes = [
 // Log route changes
 subscribe(params => console.debug("route: ", params));
 
-router(routes);
+router(arrayRegex(routes));
 
 ReactDOM.render(<Router />, document.getElementById("root"));
