@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import router, { history, subscribe, getRouteParams, setRouteParams } from "./";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import router, { history, subscribe, getRouteParams, setRouteParams } from './';
 
 function handleLink(href) {
   return function(event) {
@@ -20,7 +20,7 @@ function handleLink(href) {
 
 export function Link({ href, children, as, ...props }) {
   return React.createElement(
-    as || "a",
+    as || 'a',
     { ...props, href, onClick: handleLink(href) },
     children,
   );

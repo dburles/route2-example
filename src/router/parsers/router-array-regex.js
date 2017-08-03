@@ -1,4 +1,4 @@
-import memoizerific from "memoizerific";
+import memoizerific from 'memoizerific';
 
 let routes = [];
 
