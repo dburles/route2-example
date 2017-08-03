@@ -1,4 +1,4 @@
-import { withRouter } from "../router-react";
-import PageOne from "../components/PageOne";
+import { withRouter } from '../router/router-react';
+import PageOne from '../components/PageOne';
 
-export default withRouter()(PageOne);
+export default withRouter(PageOne);

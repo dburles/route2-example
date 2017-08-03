@@ -27,7 +27,7 @@ const getRoute = memoizerific(1)(path => {
 export default function arrayRegex(_routes) {
   routes = _routes;
   return function(path) {
-    const route = getRoute(path);
+    const route = getRoute(path.substr(1));
     if (route) {
       route.fn(route.params);
     } else {
