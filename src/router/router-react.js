@@ -21,7 +21,11 @@ function handleLink(href) {
 export function Link({ href, children, as, ...props }) {
   return React.createElement(
     as || 'a',
-    { ...props, href, onClick: handleLink(href) },
+    {
+      ...props,
+      ...(as ? {} : { href }),
+      onClick: handleLink(href),
+    },
     children,
   );
 }
@@ -32,27 +36,43 @@ Link.propTypes = {
   as: PropTypes.func,
 };
 
-export function withRouter(WrappedComponent) {
-  return class extends Component {
-    constructor() {
-      super();
-      this.subscription = subscribe(() => this.setState({}));
-    }
+export class Redirect extends Component {
+  componentWillMount() {
+    history.push(this.props.to);
+  }
 
-    componentWillUnmount() {
-      this.subscription();
-    }
+  render() {
+    return null;
+  }
+}
 
-    render() {
-      return React.createElement(WrappedComponent, {
-        ...this.props,
-        router: {
-          Link,
-          location: window.location,
-          params: getRouteParams(),
-        },
-      });
-    }
+Redirect.propTypes = {
+  to: PropTypes.string.isRequired,
+};
+
+export function withRouter(mapRouterProps = router => router) {
+  return function(WrappedComponent) {
+    return class extends Component {
+      constructor() {
+        super();
+        this.subscription = subscribe(() => this.setState({}));
+      }
+
+      componentWillUnmount() {
+        this.subscription();
+      }
+
+      render() {
+        return React.createElement(WrappedComponent, {
+          ...this.props,
+          ...mapRouterProps({
+            Link,
+            location: window.location,
+            params: getRouteParams(),
+          }),
+        });
+      }
+    };
   };
 }
 
