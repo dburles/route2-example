@@ -29,6 +29,10 @@ export const history = {
     window.history.pushState({}, null, path);
     notify(path);
   },
+  replace(path) {
+    window.history.replaceState({}, null, path);
+    notify(path);
+  },
 };
 
 export default function router(fn) {
