@@ -50,29 +50,27 @@ Redirect.propTypes = {
   to: PropTypes.string.isRequired,
 };
 
-export function withRouter(mapRouterProps = router => router) {
-  return function(WrappedComponent) {
-    return class extends Component {
-      constructor() {
-        super();
-        this.subscription = subscribe(() => this.setState({}));
-      }
+export function withRouter(WrappedComponent) {
+  return class extends Component {
+    constructor() {
+      super();
+      this.subscription = subscribe(() => this.setState({}));
+    }
 
-      componentWillUnmount() {
-        this.subscription();
-      }
+    componentWillUnmount() {
+      this.subscription();
+    }
 
-      render() {
-        return React.createElement(WrappedComponent, {
-          ...this.props,
-          ...mapRouterProps({
-            Link,
-            location: window.location,
-            params: getRouteParams(),
-          }),
-        });
-      }
-    };
+    render() {
+      return React.createElement(WrappedComponent, {
+        ...this.props,
+        router: {
+          Link,
+          location: window.location,
+          params: getRouteParams(),
+        },
+      });
+    }
   };
 }
 
